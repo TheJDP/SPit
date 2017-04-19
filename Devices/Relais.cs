@@ -5,10 +5,30 @@ namespace SPit.Devices
 {
 	public class Relais
 	{
-		public bool Enabled { get; set; }
+		private bool enabled;
+		public bool Enabled
+		{
+			get
+			{
+				return enabled;
+			}
+			set
+			{
+				if (this.enabled == value)
+				{
+					return;
+				}
+
+				this.enabled = value;
+				Console.WriteLine("GPIO Pin " + this.gpioPin + " Output: " + this.enabled);
+			}
+		}
+
+		readonly GpioPin gpioPin;
 
 		public Relais(GpioPin gpioPin)
 		{
+			this.gpioPin = gpioPin;
 		}
 	}
 }

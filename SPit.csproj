@@ -40,6 +40,7 @@
     <Compile Include="Infrastructure\GpioPinInput.cs" />
     <Compile Include="Infrastructure\GpioPinOutput.cs" />
     <Compile Include="Devices\Switch.cs" />
+    <Compile Include="Controllers\TurnSignalController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Devices\" />

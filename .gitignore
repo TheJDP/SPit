@@ -147,3 +147,4 @@ $RECYCLE.BIN/
 /.project
 .vs/config/applicationhost.config
 sh.exe.stackdump
+.spit.droidres.db

@@ -3,31 +3,40 @@ namespace SPit.Infrastructure
 {
 	public enum GpioPin
 	{
-		// Ouput Pins
-		HighBeamLightRelais = 1,
-		LowBeamLightRelais = 2,
-		FrontLightRelais = 3,
+		#region OutputPins
 
-		RearLightRelais = 4,
-		StopLightRelais = 5,
+		HighBeamLightRelais = 20,
+		LowBeamLightRelais = 21,
+		StandLightRelais = 16,
 
-		FrontLeftTurnSignalLightRelais = 6,
-		FrontRightTurnSignalLightRelais = 7,
-		RearLeftTurnSignalLightRelais = 8,
-		RearRightTurnSignalLightRelais = 9,
+		RearLightRelais = 7,
+		StopLightRelais = 8,
 
-		HornRelais = 10,
+		HornRelais = 5,
+		IgnitionRelais = 12,
+
+		FrontLeftTurnSignalLightRelais = 26,
+		FrontRightTurnSignalLightRelais = 19,
+		RearLeftTurnSignalLightRelais = 13,
+		RearRightTurnSignalLightRelais = 6,
+
+		#endregion
+
+		#region InputPins
 
 		// Input Pins
-		BeamLighSwitch = 11,
+		LightSwitch0 = 17,
+		LightSwitch1 = 27,
+		FlashLighSwitch = 25,
 
-		KeySwitch0 = 12,
-		KeySwitch1 = 13,
+		KeySwitch0 = 4,
+		KeySwitch1 = 18,
 
+		TurnSignalSwitch0 = 22,
+		TurnSignalSwitch1 = 23,
 
-		TurnSignalSwitch0 = 14,
-		TurnSignalSwitch1 = 15,
+		HornSwitch = 24
 
-		HornSwitch = 16
+		#endregion
 	}
 }

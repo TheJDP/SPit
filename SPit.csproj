@@ -34,18 +34,18 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Infrastructure\TurnSignalPosition.cs" />
     <Compile Include="Devices\Relais.cs" />
     <Compile Include="Infrastructure\GpioPin.cs" />
-    <Compile Include="Infrastructure\GpioPinInput.cs" />
-    <Compile Include="Infrastructure\GpioPinOutput.cs" />
     <Compile Include="Devices\Switch.cs" />
     <Compile Include="Controllers\TurnSignalController.cs" />
+    <Compile Include="Controllers\TcpGpioController.cs" />
+    <Compile Include="Interfaces\GpioController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Devices\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

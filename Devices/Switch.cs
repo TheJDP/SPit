@@ -7,7 +7,7 @@ namespace SPit.Devices
 	{
 		public int PossibleStates { get; private set; }
 
-		public event Action<int> StateChanged;
+		public Action<int> StateChanged;
 
 		public Switch(GpioPin gpioPin)
 		{

@@ -17,8 +17,8 @@ namespace SPit.Controllers
 
 		public event Action<TurnSignalType> TurnSignalTypeChanged;
 
-		private int turnSignalOnMilliseconds = 800;
-		private int turnSignalOffMilliseconds = 400;
+		private int turnSignalOnMilliseconds = 700;
+		private int turnSignalOffMilliseconds = 500;
 
 		private Switch turnSignalSwitch;
 		private Relais frontLeftTurnSignalRelais;
@@ -27,6 +27,7 @@ namespace SPit.Controllers
 		private Relais rearRightTurnSignalRelais;
 
 		private TurnSignalType turnSignalType;
+		private Object turnToken;
 
 		public TurnSignalController(Switch turnSignalSwitch, 
 		                            Relais frontLeftTurnSignalRelais, 
@@ -126,9 +127,11 @@ namespace SPit.Controllers
 
 			Task.Factory.StartNew(() =>
 			{
+				Object localTurnToken = new Object();
+				this.turnToken = localTurnToken;
 				while (true)
 				{
-					if (localTurnSignalType != this.turnSignalType || this.turnSignalType == TurnSignalType.None)
+					if (localTurnToken != this.turnToken || this.turnSignalType == TurnSignalType.None)
 					{
 						return;
 					}
@@ -153,7 +156,7 @@ namespace SPit.Controllers
 
 					Thread.Sleep(this.turnSignalOnMilliseconds);
 
-					if (localTurnSignalType != this.turnSignalType || this.turnSignalType == TurnSignalType.None)
+					if (localTurnToken != this.turnToken || this.turnSignalType == TurnSignalType.None)
 					{
 						return;
 					}

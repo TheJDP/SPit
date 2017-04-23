@@ -1,11 +1,11 @@
 ﻿using System;
 using SPit.Infrastructure;
+using SPit.Interfaces;
 
 namespace SPit.Devices
 {
 	public class Relais
 	{
-		private bool enabled;
 		public bool Enabled
 		{
 			get
@@ -20,15 +20,20 @@ namespace SPit.Devices
 				}
 
 				this.enabled = value;
-				Console.WriteLine("GPIO Pin " + this.gpioPin + " Output: " + this.enabled);
+				this.gpioController.Set(this.gpioPin, this.enabled);
 			}
 		}
 
-		readonly GpioPin gpioPin;
+		private readonly GpioPin gpioPin;
+		private readonly GpioController gpioController;
+		private bool enabled;
 
-		public Relais(GpioPin gpioPin)
+		public Relais(GpioController gpioController, GpioPin gpioPin)
 		{
+			this.gpioController = gpioController;
 			this.gpioPin = gpioPin;
+
+			this.gpioController.Set(this.gpioPin, false);
 		}
 	}
 }

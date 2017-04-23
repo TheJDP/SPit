@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Net.Sockets;
+using SPit.Controllers;
 using SPit.Devices;
 using SPit.Infrastructure;
+using SPit.Interfaces;
 
 namespace SPit
 {
@@ -8,25 +11,45 @@ namespace SPit
 	{
 		public static void Main(string[] args)
 		{
-			/*Switch beamLightSwitch = new Switch(GpioPin.BeamLighSwitch);
-			Switch keySwitch = new Switch(GpioPin.KeySwitch0, GpioPin.KeySwitch1);
+			GpioController gpioController = new TcpGpioController("192.168.178.45", 10000);
+
 			Switch turnSignalSwitch = new Switch(GpioPin.TurnSignalSwitch0, GpioPin.TurnSignalSwitch1);
-			Switch hornSwitch = new Switch(GpioPin.HornSwitch);
 
+			Relais frontLightRelais = new Relais(gpioController, GpioPin.StandLightRelais);
 
-			Relais highBeamLightRelais = new Relais(GpioPin.HighBeamLightRelais);
-			Relais lowBeamLightRelais = new Relais(GpioPin.LowBeamLightRelais);
-			Relais frontLightRelais = new Relais(GpioPin.FrontLightRelais);
+			Relais frontLeftTurnSignalLightRelais = new Relais(gpioController, GpioPin.FrontLeftTurnSignalLightRelais);
+			Relais frontRightTurnSignalLightRelais = new Relais(gpioController, GpioPin.FrontRightTurnSignalLightRelais);
+			Relais rearLeftTurnSignalLightRelais = new Relais(gpioController, GpioPin.RearLeftTurnSignalLightRelais);
+			Relais rearRightTurnSignalLightRelais = new Relais(gpioController, GpioPin.RearRightTurnSignalLightRelais);
 
-			Relais frontLeftTurnSignalLightRelais = new Relais(GpioPin.FrontLeftTurnSignalLightRelais);
-			Relais frontRightTurnSignalLightRelais = new Relais(GpioPin.FrontRightTurnSignalLightRelais);
-			Relais rearLeftTurnSignalLightRelais = new Relais(GpioPin.RearLeftTurnSignalLightRelais);
-			Relais rearRightTurnSignalLightRelais = new Relais(GpioPin.RearRightTurnSignalLightRelais);
-
-			Relais rearLightRelais = new Relais(GpioPin.RearLightRelais);
-			Relais stopLightRelais = new Relais(GpioPin.StopLightRelais);
-
-			Relais hornRelais = new Relais(GpioPin.HornRelais);*/
+			TurnSignalController tsc = new TurnSignalController(turnSignalSwitch, 
+			                                                    frontLeftTurnSignalLightRelais, 
+			                                                    frontRightTurnSignalLightRelais, 
+			                                                    rearLeftTurnSignalLightRelais, 
+			                                                    rearRightTurnSignalLightRelais);
+			
+			// For testing ->
+			while (true)
+			{
+				ConsoleKeyInfo key = System.Console.ReadKey();
+				switch (key.Key)
+				{
+					case ConsoleKey.Q:
+						turnSignalSwitch.StateChanged(0);
+						break;
+					case ConsoleKey.W:
+						turnSignalSwitch.StateChanged(1);
+						break;
+					case ConsoleKey.E:
+						turnSignalSwitch.StateChanged(2);
+						break;
+					case ConsoleKey.R:
+						turnSignalSwitch.StateChanged(3);
+						break;
+					case ConsoleKey.Escape:
+						return;
+				}
+			}
 		}
 	}
 }
